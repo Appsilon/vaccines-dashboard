@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.3",
+    "Version": "4.2.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -32,6 +32,16 @@
       "Repository": "CRAN",
       "Hash": "71476c1d88d1ebdf31580e5a257d5d31",
       "Requirements": []
+    },
+    "Matrix": {
+      "Package": "Matrix",
+      "Version": "1.5-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4006dffe49958d2dd591c17e61e60591",
+      "Requirements": [
+        "lattice"
+      ]
     },
     "R6": {
       "Package": "R6",
@@ -67,18 +77,6 @@
         "Rcpp",
         "curl",
         "jsonlite"
-      ]
-    },
-    "appsilon.blueprint": {
-      "Package": "appsilon.blueprint",
-      "Version": "0.1.0",
-      "Source": "Repository",
-      "Repository": null,
-      "Hash": "d9ddf5bab51a7e33dc4db03630d1566a",
-      "Requirements": [
-        "htmltools",
-        "shiny",
-        "shiny.react"
       ]
     },
     "askpass": {
@@ -195,13 +193,11 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.2.0",
+      "Version": "3.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "1bdb126893e9ce6aae50ad1d6fc32faf",
-      "Requirements": [
-        "glue"
-      ]
+      "Hash": "3177a5a16c243adc199ba33117bd9657",
+      "Requirements": []
     },
     "clipr": {
       "Package": "clipr",
@@ -466,6 +462,7 @@
         "glue",
         "gtable",
         "isoband",
+        "mgcv",
         "rlang",
         "scales",
         "tibble",
@@ -687,11 +684,12 @@
     },
     "lifecycle": {
       "Package": "lifecycle",
-      "Version": "1.0.1",
+      "Version": "1.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a6b6d352e3ed897373ab19d8395c98d0",
+      "Hash": "001cecbeac1cff9301bdc3775ee46a86",
       "Requirements": [
+        "cli",
         "glue",
         "rlang"
       ]
@@ -735,6 +733,17 @@
         "xfun"
       ]
     },
+    "mgcv": {
+      "Package": "mgcv",
+      "Version": "1.8-41",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6b3904f13346742caa3e82dd0303d4ad",
+      "Requirements": [
+        "Matrix",
+        "nlme"
+      ]
+    },
     "mime": {
       "Package": "mime",
       "Version": "0.12",
@@ -751,6 +760,16 @@
       "Hash": "6dfe8bf774944bd5595785e3229d8771",
       "Requirements": [
         "colorspace"
+      ]
+    },
+    "nlme": {
+      "Package": "nlme",
+      "Version": "3.1-162",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0984ce8da8da9ead8643c5cbbb60f83e",
+      "Requirements": [
+        "lattice"
       ]
     },
     "openssl": {
@@ -981,10 +1000,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.4",
+      "Version": "1.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6539dd8c651e67e3b55b5ffea106362b",
+      "Hash": "4ed1f8336c8d52c3e750adcdc57228a7",
       "Requirements": []
     },
     "s2": {
@@ -1082,6 +1101,24 @@
         "sourcetools",
         "withr",
         "xtable"
+      ]
+    },
+    "shiny.blueprint": {
+      "Package": "shiny.blueprint",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "appsilon",
+      "RemoteRepo": "shiny.blueprint",
+      "RemoteRef": "main",
+      "RemoteSha": "d8c60054388aad3cade3ba3d323b53e916e93df4",
+      "Hash": "9f7f973aef7805a3545a5e62d90481ab",
+      "Requirements": [
+        "checkmate",
+        "htmltools",
+        "shiny",
+        "shiny.react"
       ]
     },
     "shiny.react": {
@@ -1314,10 +1351,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.30",
+      "Version": "0.37",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e83f48136b041845e50a6658feffb197",
+      "Hash": "a6860e1400a8fd1ddb6d9b4230cc34ab",
       "Requirements": []
     },
     "xtable": {

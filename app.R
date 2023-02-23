@@ -1,5 +1,5 @@
 library(shiny)
-library(appsilon.blueprint)
+library(shiny.blueprint)
 library(shiny.react)
 
 source("./app/view/navbar.R")
