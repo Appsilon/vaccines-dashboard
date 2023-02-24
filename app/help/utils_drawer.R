@@ -1,12 +1,26 @@
-prep_vac_txt <- function(vac,
-                         ls_vac_text = drawer_txt) {
-  checkmate::assert_string(vac)
-  checkmate::assert_subset(vac, choices = names(ls_vac_text))
+# Box imports -----------------------------------------------------------------
+
+box::use(
+  shiny[tagList, tags, br, hr],
+
+  checkmate[assert_string, assert_subset],
+  
+  shiny.blueprint[H4, Text, UL, Callout, H6, Code],
+)
+
+# -----------------------------------------------------------------------------
+
+#' @export
+#' @examples
+#' prep_vac_txt("BCG")
+prep_vac_txt <- function(vac, ls_vac_text = drawer_txt) {
+  assert_string(vac)
+  assert_subset(vac, choices = names(ls_vac_text))
   
   ls_vac_text[[vac]]
 }
 
-
+#' @export
 drawer_txt <- list(
   "MCV1" = tagList(
     H4("Measles vaccine"),
@@ -121,6 +135,7 @@ drawer_txt <- list(
          Pneumococcal vaccines are vaccines that target S. pneumoniae bacteria.")
   ))
 
+#' @export
 drawer_questions <- list(
   
   H6("Q20 Which of the following people do you trust for medical/health advice?"),

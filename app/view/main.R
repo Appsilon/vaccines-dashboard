@@ -1,13 +1,25 @@
-source("./app/help/data_import.R")
-source("./app/help/utils_fun_plot.R")
-source("./app/help/utlis_prep_data.R")
-source("./app/help/utils_drawer.R")
-source("./app/help/utils_menu.R")
-source("./app/help/utils_tree.R")
+# Box imports -----------------------------------------------------------------
+box::use(
+  shiny[
+    NS, moduleServer, reactive, reactiveVal, observeEvent, shinyApp, req,
+    renderText, htmlOutput, br, fluidRow, column,
+  ],
+  
+  shiny.blueprint[
+    Callout, Collapse, Button.shinyInput, Card,
+    reactOutput, renderReact,
+  ]
+)
 
-source("./app/view/main_world.R")
-source("./app/view/main_country.R")
+box::use(
+  app/help/utils_tree[tree_server, tree_ui],
+  app/help/utils_menu[menu_server, menu_ui],
+  app/view/main_country[main_country_server, main_country_ui],
+)
 
+# UI ---------------------------------------------------------------------------
+
+#' @export
 main_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -18,19 +30,20 @@ main_ui <- function(id) {
     Card(
       elevation = 2, interactive = TRUE,
       fluidRow(  
-        column(6,
-               div(style = "display: flex; align-items: center;",
-                   H6(
-                     "Country",
-                     style = "margin: 0 10px 0 0;"),
-                   tree_ui(ns("vac_country")),
-               )
+        column(
+          6,
+          div(
+            style = "display: flex; align-items: center;",
+            H6("Country", style = "margin: 0 10px 0 0;"),
+            tree_ui(ns("vac_country")),
+          )
         ),
-        column(6,
-               Callout(
-                 style = "min-height: 40px;",
-                  htmlOutput(ns("chosen_country"))
-               )
+        column(
+          6,
+          Callout(
+            style = "min-height: 40px;",
+            htmlOutput(ns("chosen_country"))
+          )
         )
       )   
     ),
@@ -46,7 +59,9 @@ main_ui <- function(id) {
   
 }
 
+# Server ----------------------------------------------------------------------
 
+#' @export
 main_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -76,8 +91,9 @@ main_server <- function(id) {
     show_detail <- reactiveVal(FALSE)
     observeEvent(input$show_detail, show_detail(!show_detail()))
     output$ui_detail<- renderReact({
-      Collapse(isOpen = show_detail(),
-               main_country_ui(ns("country"))
+      Collapse(
+        isOpen = show_detail(),
+        main_country_ui(ns("country"))
       )
     })
     
@@ -88,4 +104,6 @@ main_server <- function(id) {
   })
 }
 
-# shinyApp(main_ui("app"), function(input, output) main_server("app"))
+if (interactive()) {
+  shinyApp(main_ui("app"), function(input, output) main_server("app"))
+}

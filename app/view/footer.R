@@ -1,3 +1,12 @@
+# Box imports -----------------------------------------------------------------
+
+box::use(
+  shiny[div],
+  shiny.blueprint[ControlGroup, Text],
+)
+
+# -----------------------------------------------------------------------------
+
 footer <- ControlGroup(
   fill = TRUE,
   Text("Built with ❤ by Appsilon"),

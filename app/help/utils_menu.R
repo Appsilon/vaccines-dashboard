@@ -1,3 +1,16 @@
+# Box imports -----------------------------------------------------------------
+
+box::use(
+  shiny[
+    NS, moduleServer, tagList, reactive, reactiveVal, observeEvent
+  ],
+  
+  shiny.blueprint[
+    Menu, MenuItem, MenuDivider, setInput, renderReact, reactOutput, triggerEvent
+  ],
+)
+
+#' @export
 menu_ui <- function(id) {
   ns <- NS(id)
   
@@ -66,8 +79,7 @@ menu_ui <- function(id) {
   )
 }
 
-
-
+#' @export
 menu_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -104,4 +116,4 @@ menu_server <- function(id) {
   })
 }
 
-# if (interactive()) shinyApp(ui("app"), function(input, output) server("app"))
+if (interactive()) shinyApp(ui("app"), function(input, output) server("app"))

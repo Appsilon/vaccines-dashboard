@@ -1,3 +1,19 @@
+# Box imports -----------------------------------------------------------------
+
+box::use(
+  shiny[
+    NS, moduleServer, tagList, reactive, reactiveVal, observeEvent
+  ],
+  shiny.blueprint[
+    Tree, setInput, renderReact, reactOutput
+  ],
+  purrr[
+    list_modify, map
+  ],
+)
+
+# -----------------------------------------------------------------------------
+
 ls_grp_country <- list(
   "North Africa" = c("Algeria", "Egypt", "Libya", "Morocco", "Tunisia"),
   "Eastern Africa" = c(
@@ -76,15 +92,16 @@ treeList <- list(
 # ---
 
 modifyTree <- function(tree, ids, props) {
-  if (!is.null(tree)) purrr::map(tree, function(node) {
+  if (!is.null(tree)) map(tree, function(node) {
     if (node$id %in% ids) {
-      node <- purrr::list_modify(node, !!!props)
+      node <- list_modify(node, !!!props)
     }
     node$childNodes <- modifyTree(node$childNodes, ids, props)
     node
   })
 }
 
+#' @export
 tree_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -92,6 +109,7 @@ tree_ui <- function(id) {
   )
 }
 
+#' @export
 tree_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
@@ -131,4 +149,4 @@ tree_server <- function(id) {
   })
 }
 
-# shinyApp(tree_ui("app"), function(input, output) tree_server("app"))
+# shiny::shinyApp(tree_ui("app"), function(input, output) tree_server("app"))

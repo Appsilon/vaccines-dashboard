@@ -1,3 +1,38 @@
+# Box imports -----------------------------------------------------------------
+
+box::use(
+  shiny[
+    NS, moduleServer, reactive, reactiveVal, observeEvent, shinyApp,
+    tagList, fluidRow, column, div, br, textOutput,
+  ],
+  
+  leaflet[renderLeaflet, leafletOutput],
+  
+  shiny.blueprint[
+    Card, Text, H6, HTMLSelect.shinyInput, Button.shinyInput, Drawer,
+    triggerEvent, renderReact, reactOutput,
+  ],
+  
+  dplyr[select, pull],
+  
+  tidyr[drop_na],
+)
+
+# Box app modules -----------------------------------------------------------------
+box::use(
+  app/help/utils_drawer[prep_vac_txt, drawer_questions],
+  app/help/utils_menu[menu_ui, menu_server],
+  app/help/data_import[
+    ls_vac, tab_vaccines, world_country, wgm_responses_map, ls_colors,
+  ],
+  app/help/utils_fun_plot[map_trust, map_vaccines],
+  app/help/utils_prep_data[
+    prep_trust_title, prep_vac_data, prep_trust_data, prep_vac_title,
+  ],
+)
+
+# -----------------------------------------------------------------------------
+
 main_world_ui <- function(id) {
   ns <- NS(id)
   
@@ -118,8 +153,8 @@ main_world_server <- function(id) {
     })
     
     ls_year <- reactive({
-      tab_vaccines |> dplyr::select(c("Entity", "Year", vac_type())) |>
-        tidyr::drop_na(vac_type()) |> dplyr::pull(Year) |> unique() |> sort() |>
+      tab_vaccines |> select(c("Entity", "Year", vac_type())) |>
+        drop_na(vac_type()) |> pull(Year) |> unique() |> sort() |>
         as.character()
     })
     
@@ -160,8 +195,7 @@ main_world_server <- function(id) {
     })
     
     output$vac_map <- leaflet::renderLeaflet({
-      map_vaccines(vac_data(),
-                   world_country = world_country)
+      map_vaccines(vac_data(), world_country = world_country)
     })
     
     # drawer vac_drawer
@@ -257,4 +291,6 @@ main_world_server <- function(id) {
   })
 }
 
-# shinyApp(main_world_ui("app"), function(input, output) main_world_server("app"))
+if (interactive()) {
+  shinyApp(main_world_ui("app"), function(input, output) main_world_server("app")) 
+}

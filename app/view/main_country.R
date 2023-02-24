@@ -1,3 +1,34 @@
+# Box imports -----------------------------------------------------------------
+
+box::use(
+  shiny[
+    NS, moduleServer, reactive, reactiveVal, observeEvent, shinyApp, req,
+    tagList, fluidRow, column, div, textOutput, tabsetPanel,
+  ],
+  
+  shiny.blueprint[
+    Card, H6, HTMLSelect.shinyInput,
+    reactOutput, renderReact,
+  ],
+  
+  plotly[plotlyOutput, renderPlotly]
+)
+
+box::use(
+  app/help/utils_fun_plot[
+    plot_country_vaccines, plot_country_detail, plot_country_questions
+  ],
+  
+  app/help/utils_prep_data[
+    prep_country_title, prep_country_data, prep_country_detail, 
+    prep_country_questions
+  ],
+  
+  app/help/data_import[
+    detail_responses_country, wgm_responses_country, wgm_questions
+  ],
+)
+
 main_country_ui <- function(id) {
   ns <- NS(id)
   
@@ -26,32 +57,56 @@ main_country_ui <- function(id) {
                style = "height: 580px",
                # plot
                textOutput(ns("vac_country_title")),
-               plotly::plotlyOutput(ns("vac_country_lineplot"), height = "500px")
+               plotlyOutput(ns("vac_country_lineplot"), height = "500px")
              )
       ),
-      column(6,
-             Card(
-               elevation = 2, interactive = TRUE,
-               style = "height: 580px",
-               # plot
-               tabsetPanel(
-                 selected = "Trust",
-                 tabPanel("Trust Index", value = "InxDet",
-                          plotly::plotlyOutput(ns("WTScIdet_country_barplot"), height = "500px")
-                 ),
-                 tabPanel("Trust", value = "Trust",
-                          plotly::plotlyOutput(ns("trust_country_barplot_1"), height = "200px"),
-                          plotly::plotlyOutput(ns("trust_country_barplot_2"), height = "300px")
-                 ),
-                 tabPanel("Vaccines", value = "Vac",
-                          plotly::plotlyOutput(ns("vac_country_barplot_1"), height = "140px"),
-                          plotly::plotlyOutput(ns("vac_country_barplot_2"), height = "360px")
-                 ),
-                 tabPanel("Vaccines safety", value = "VacDet",
-                          plotly::plotlyOutput(ns("Q25det_country_barplot"), height = "500px")
-                 )
-               )
-             )
+      column(
+        6,
+        Card(
+          elevation = 2, interactive = TRUE,
+          style = "height: 580px",
+          # plot
+          tabsetPanel(
+            selected = "Trust",
+            tabPanel(
+              "Trust Index",
+              value = "InxDet",
+              plotlyOutput(
+                ns("WTScIdet_country_barplot"), 
+                height = "500px"
+              )
+            ),
+            tabPanel(
+              "Trust",
+              value = "Trust",
+              plotlyOutput(
+                ns("trust_country_barplot_1"), height = "200px"
+              ),
+              plotlyOutput(
+                ns("trust_country_barplot_2"), height = "300px"
+              )
+            ),
+            tabPanel(
+              "Vaccines", value = "Vac",
+              plotlyOutput(
+                ns("vac_country_barplot_1"),
+                height = "140px"
+              ),
+              plotlyOutput(
+                ns("vac_country_barplot_2"), 
+                height = "360px"
+              )
+           ),
+            tabPanel(
+              "Vaccines safety", 
+              value = "VacDet",
+              plotlyOutput(
+                ns("Q25det_country_barplot"), 
+                height = "500px"
+              )
+            )
+          )
+        )
       )
     )
   )
@@ -83,36 +138,43 @@ main_country_server <- function(id, vac_country) {
       vac_country_title()
     })
     
-    output$vac_country_lineplot <- plotly::renderPlotly({
+    output$vac_country_lineplot <- renderPlotly({
       
-      plot_country_vaccines(plt_data = vac_country_data(),
-                            ls_col = ls_colors[["vac"]])
+      plot_country_vaccines(
+        plt_data = vac_country_data(),
+        ls_col = ls_colors[["vac"]]
+      )
     })
     
     # barplot
     WTScIdet_country_detail <- reactive({
       req(vac_country())
       
-      prep_country_detail(country = vac_country(), 
-                          src_data = detail_responses_country[["WTScI"]])
+      prep_country_detail(
+        country = vac_country(), 
+        src_data = detail_responses_country[["WTScI"]]
+      )
     })
     
-    output$WTScIdet_country_barplot <- plotly::renderPlotly({
+    output$WTScIdet_country_barplot <- renderPlotly({
       plot_country_detail(
         plt_data = WTScIdet_country_detail(),
         ls_col = ls_colors[["WTScI"]],
         plt_title = "Wellcome Trust in Science Index")
     })
+    
     # ---
     trust_country_questions_1 <- reactive({
       req(vac_country())
       
-      prep_country_questions(country = vac_country(), 
-                             src_data = wgm_responses_country,
-                             num_q = c("Q20"))
+      prep_country_questions(
+        country = vac_country(), 
+        src_data = wgm_responses_country,
+        num_q = c("Q20")
+      )
     })
     
-    output$trust_country_barplot_1 <- plotly::renderPlotly({
+    output$trust_country_barplot_1 <- renderPlotly({
       plot_country_questions(
         plt_data = trust_country_questions_1(),
         ls_col = ls_colors,
@@ -124,12 +186,14 @@ main_country_server <- function(id, vac_country) {
     trust_country_questions_2 <- reactive({
       req(vac_country())
       
-      prep_country_questions(country = vac_country(), 
-                             src_data = wgm_responses_country,
-                             num_q = c("Q21", "Q22"))
+      prep_country_questions(
+        country = vac_country(), 
+        src_data = wgm_responses_country,
+        num_q = c("Q21", "Q22")
+      )
     })
     
-    output$trust_country_barplot_2 <- plotly::renderPlotly({
+    output$trust_country_barplot_2 <- renderPlotly({
       plot_country_questions(
         plt_data = trust_country_questions_2(),
         ls_col = ls_colors,
@@ -142,12 +206,14 @@ main_country_server <- function(id, vac_country) {
     vac_country_questions_1 <- reactive({
       req(vac_country())
       
-      prep_country_questions(country = vac_country(), 
-                             src_data = wgm_responses_country,
-                             num_q = c("Q23"))
+      prep_country_questions(
+        country = vac_country(), 
+        src_data = wgm_responses_country,
+        num_q = c("Q23")
+      )
     })
     
-    output$vac_country_barplot_1 <- plotly::renderPlotly({
+    output$vac_country_barplot_1 <- renderPlotly({
       plot_country_questions(
         plt_data = vac_country_questions_1(),
         ls_col = ls_colors,
@@ -159,12 +225,14 @@ main_country_server <- function(id, vac_country) {
     vac_country_questions_2 <- reactive({
       req(vac_country())
 
-      prep_country_questions(country = vac_country(), 
-                             src_data = wgm_responses_country,
-                             num_q = c("Q24", "Q25", "Q26"))
+      prep_country_questions(
+        country = vac_country(), 
+        src_data = wgm_responses_country,
+        num_q = c("Q24", "Q25", "Q26")
+      )
     })
     
-    output$vac_country_barplot_2 <- plotly::renderPlotly({
+    output$vac_country_barplot_2 <- renderPlotly({
       plot_country_questions(
         plt_data = vac_country_questions_2(),
         ls_col = ls_colors,
@@ -177,11 +245,13 @@ main_country_server <- function(id, vac_country) {
     Q25det_country_detail <- reactive({
       req(vac_country())
      
-      prep_country_detail(country = vac_country(), 
-                          src_data = detail_responses_country[["Q25"]])
+      prep_country_detail(
+        country = vac_country(), 
+        src_data = detail_responses_country[["Q25"]]
+      )
     })
     
-    output$Q25det_country_barplot <- plotly::renderPlotly({
+    output$Q25det_country_barplot <- renderPlotly({
       plot_country_detail(
         plt_data = Q25det_country_detail(),
         ls_col = ls_colors[["Q25"]],
@@ -192,4 +262,9 @@ main_country_server <- function(id, vac_country) {
   })
 }
 
-# shinyApp(main_country_ui("app"), function(input, output) main_country_server("app", reactive({"Poland"})))
+if (interactive()) {
+  shinyApp(
+    main_country_ui("app"), 
+    function(input, output) main_country_server("app", reactive({"Poland"}))
+  )
+}

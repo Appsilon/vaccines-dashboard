@@ -1,11 +1,16 @@
-library(shiny)
-library(shiny.blueprint)
-library(shiny.react)
+# Box imports -----------------------------------------------------------------
 
-source("./app/view/navbar.R")
-source("./app/view/main.R")
-source("./app/view/footer.R")
+box::use(
+  shiny[
+    fluidPage, tags, includeCSS, div, shinyApp
+  ],
+)
 
+box::use(
+  app/view/navbar[navbar_ui, navbar_server],
+  app/view/footer[footer],
+  app/view/main[main_server, main_ui],
+)
 
 ui <- fluidPage(
   
