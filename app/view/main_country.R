@@ -2,8 +2,9 @@
 
 box::use(
   shiny[
-    NS, moduleServer, reactive, reactiveVal, observeEvent, shinyApp, req,
-    tagList, fluidRow, column, div, textOutput, tabsetPanel,
+    NS, moduleServer, reactive, reactiveVal, observeEvent, req,
+    tagList, fluidRow, column, div, textOutput, tabsetPanel, renderText,
+    tabPanel,
   ],
   
   shiny.blueprint[
@@ -14,20 +15,29 @@ box::use(
   plotly[plotlyOutput, renderPlotly]
 )
 
+# Box imports: application ----------------------------------------------------
+
 box::use(
-  app/help/utils_fun_plot[
+  app/logic/utils_fun_plot[
     plot_country_vaccines, plot_country_detail, plot_country_questions
   ],
   
-  app/help/utils_prep_data[
+  app/logic/utils_prep_data[
     prep_country_title, prep_country_data, prep_country_detail, 
     prep_country_questions
   ],
   
-  app/help/data_import[
-    detail_responses_country, wgm_responses_country, wgm_questions
+  app/logic/data_import[
+    detail_responses_country, wgm_responses_country, wgm_questions, 
+    tab_vaccines, ls_colors,
   ],
 )
+
+# -----------------------------------------------------------------------------
+#
+#
+# UI
+
 
 main_country_ui <- function(id) {
   ns <- NS(id)
@@ -112,6 +122,10 @@ main_country_ui <- function(id) {
   )
 }
 
+# -----------------------------------------------------------------------------
+#
+#
+# Server
 
 main_country_server <- function(id, vac_country) {
   moduleServer(id, function(input, output, session) {
@@ -262,9 +276,9 @@ main_country_server <- function(id, vac_country) {
   })
 }
 
-if (interactive()) {
-  shinyApp(
-    main_country_ui("app"), 
-    function(input, output) main_country_server("app", reactive({"Poland"}))
-  )
-}
+# if (interactive()) {
+#   shiny::shinyApp(
+#     main_country_ui("app"), 
+#     function(input, output) main_country_server("app", reactive({"Poland"}))
+#   )
+# }

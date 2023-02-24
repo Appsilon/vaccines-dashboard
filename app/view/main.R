@@ -1,23 +1,29 @@
 # Box imports -----------------------------------------------------------------
 box::use(
   shiny[
-    NS, moduleServer, reactive, reactiveVal, observeEvent, shinyApp, req,
-    renderText, htmlOutput, br, fluidRow, column,
+    NS, moduleServer, reactive, reactiveVal, observeEvent, req,
+    renderText, htmlOutput, br, fluidRow, column, tagList, div,
   ],
   
   shiny.blueprint[
-    Callout, Collapse, Button.shinyInput, Card,
+    Callout, Collapse, Button.shinyInput, Card, H6,
     reactOutput, renderReact,
   ]
 )
 
+# Box imports: application ----------------------------------------------------
+
 box::use(
-  app/help/utils_tree[tree_server, tree_ui],
-  app/help/utils_menu[menu_server, menu_ui],
+  app/logic/utils_tree[tree_server, tree_ui],
+  app/logic/utils_menu[menu_server, menu_ui],
   app/view/main_country[main_country_server, main_country_ui],
+  app/view/main_world[main_world_server, main_world_ui],
 )
 
-# UI ---------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+#
+#
+# UI
 
 #' @export
 main_ui <- function(id) {
@@ -59,7 +65,10 @@ main_ui <- function(id) {
   
 }
 
-# Server ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+#
+#
+# Server
 
 #' @export
 main_server <- function(id) {
@@ -104,6 +113,9 @@ main_server <- function(id) {
   })
 }
 
-if (interactive()) {
-  shinyApp(main_ui("app"), function(input, output) main_server("app"))
-}
+# if (interactive()) {
+#   shiny::shinyApp(
+#     main_ui("app"), 
+#     function(input, output) main_server("app")
+#   )
+# }

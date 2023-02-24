@@ -3,25 +3,25 @@
 box::use(
   shiny[
     NS, moduleServer, reactive, reactiveVal, observeEvent,
-    # HTML tags ---------------------------------------------------------------
     tagList, a, br,
   ],
   
   shiny.blueprint[
-    # Shiny.blueprint components ----------------------------------------------
     Navbar, NavbarGroup, NavbarHeading, Button.shinyInput, NavbarDivider,
     Alert, Blockquote, H5,
-    # Shiny.react objects exported from Shiny.blueprint -----------------------
     triggerEvent, renderReact, reactOutput,
   ],
 )
 
 # -----------------------------------------------------------------------------
+#
+#
+# UI
 
 #' @export
 navbar_ui <- function(id) {
   ns <- NS(id)
-  
+
   tagList(
     reactOutput(ns("source_info")),
     
@@ -50,6 +50,11 @@ navbar_ui <- function(id) {
     )
   )
 }
+
+# -----------------------------------------------------------------------------
+#
+#
+# Server
 
 #' @export
 navbar_server <- function(id) {
@@ -102,6 +107,9 @@ navbar_server <- function(id) {
   })
 }
 
-if (interactive()) {
-  shiny::shinyApp(navbar_ui("app"), function(input, output) navbar_server("app"))
-}
+# if (interactive()) {
+#   shiny::shinyApp(
+#     navbar_ui("app"),
+#     function(input, output) navbar_server("app")
+#   )
+# }

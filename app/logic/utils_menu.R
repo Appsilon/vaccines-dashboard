@@ -10,6 +10,11 @@ box::use(
   ],
 )
 
+# -----------------------------------------------------------------------------
+#
+#
+# UI
+
 #' @export
 menu_ui <- function(id) {
   ns <- NS(id)
@@ -79,6 +84,11 @@ menu_ui <- function(id) {
   )
 }
 
+# -----------------------------------------------------------------------------
+#
+#
+# Server
+
 #' @export
 menu_server <- function(id) {
   moduleServer(id, function(input, output, session) {
@@ -116,4 +126,6 @@ menu_server <- function(id) {
   })
 }
 
-if (interactive()) shinyApp(ui("app"), function(input, output) server("app"))
+# if (interactive()) {
+#   shiny::shinyApp(ui("app"), function(input, output) server("app")) 
+# }

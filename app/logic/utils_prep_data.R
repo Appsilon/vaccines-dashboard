@@ -11,6 +11,10 @@ box::use(
   tidyr[pivot_longer],
 )
 
+box::use(
+  app/logic/data_import[wgm_questions],
+)
+
 # -----------------------------------------------------------------------------
 
 #' @export

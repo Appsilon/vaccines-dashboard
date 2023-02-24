@@ -9,7 +9,7 @@ box::use(
 
 footer <- ControlGroup(
   fill = TRUE,
-  Text("Built with ❤ by Appsilon"),
+  Text("Built with \U2764\UFE0F by Appsilon"), # red heart unicode
   
   div(
     style = "text-align: right;",

@@ -2,8 +2,8 @@
 
 box::use(
   shiny[
-    NS, moduleServer, reactive, reactiveVal, observeEvent, shinyApp,
-    tagList, fluidRow, column, div, br, textOutput,
+    NS, moduleServer, reactive, reactiveVal, observeEvent,
+    tagList, fluidRow, column, div, br, textOutput, renderText, req, hr,
   ],
   
   leaflet[renderLeaflet, leafletOutput],
@@ -18,20 +18,26 @@ box::use(
   tidyr[drop_na],
 )
 
-# Box app modules -----------------------------------------------------------------
+# Box imports: application ----------------------------------------------------
+
 box::use(
-  app/help/utils_drawer[prep_vac_txt, drawer_questions],
-  app/help/utils_menu[menu_ui, menu_server],
-  app/help/data_import[
+  app/logic/utils_drawer[prep_vac_txt, drawer_questions],
+  app/logic/utils_menu[menu_ui, menu_server],
+  app/logic/utils_fun_plot[map_trust, map_vaccines],
+  
+  app/logic/data_import[
     ls_vac, tab_vaccines, world_country, wgm_responses_map, ls_colors,
   ],
-  app/help/utils_fun_plot[map_trust, map_vaccines],
-  app/help/utils_prep_data[
+  
+  app/logic/utils_prep_data[
     prep_trust_title, prep_vac_data, prep_trust_data, prep_vac_title,
   ],
 )
 
 # -----------------------------------------------------------------------------
+#
+#
+# UI
 
 main_world_ui <- function(id) {
   ns <- NS(id)
@@ -142,6 +148,11 @@ main_world_ui <- function(id) {
     )
   )
 }
+
+# -----------------------------------------------------------------------------
+#
+#
+# Server
 
 main_world_server <- function(id) {
   moduleServer(id, function(input, output, session) {
@@ -291,6 +302,9 @@ main_world_server <- function(id) {
   })
 }
 
-if (interactive()) {
-  shinyApp(main_world_ui("app"), function(input, output) main_world_server("app")) 
-}
+# if (interactive()) {
+#   shiny::shinyApp(
+#     main_world_ui("app"), 
+#     function(input, output) main_world_server("app")
+#   )
+# }
