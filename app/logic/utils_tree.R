@@ -140,7 +140,8 @@ tree_server <- function(id) {
           length(input$click$id)) {
         input$click$id
       } else if (length(input$click$id)) {
-        "Poland" # marking selected
+        # "Poland" # development trick to select Poland when clicking any node
+        NULL
       }
     })
     

@@ -2,9 +2,9 @@
 
 box::use(
   shiny[
-    NS, moduleServer, reactive, reactiveVal, observeEvent, req,
+    NS, moduleServer, reactive, reactiveVal, observeEvent, req, 
     tagList, fluidRow, column, div, textOutput, tabsetPanel, renderText,
-    tabPanel,
+    tabPanel, updateTabsetPanel, mainPanel,
   ],
   
   shiny.blueprint[
@@ -73,16 +73,19 @@ main_country_ui <- function(id) {
       column(
         6,
         Card(
-          elevation = 2, interactive = TRUE,
+          elevation = 2,
+          interactive = TRUE,
           style = "height: 580px",
           # plot
           tabsetPanel(
+            id = "country_tabs",
             selected = "Trust",
+            type = "tabs",
             tabPanel(
               "Trust Index",
               value = "InxDet",
               plotlyOutput(
-                ns("WTScIdet_country_barplot"), 
+                ns("WTScIdet_country_barplot"),
                 height = "500px"
               )
             ),
@@ -97,13 +100,14 @@ main_country_ui <- function(id) {
               )
             ),
             tabPanel(
-              "Vaccines", value = "Vac",
+              "Vaccines",
+              value = "Vac",
               plotlyOutput(
                 ns("vac_country_barplot_1"),
                 height = "140px"
               ),
               plotlyOutput(
-                ns("vac_country_barplot_2"), 
+                ns("vac_country_barplot_2"),
                 height = "360px"
               )
            ),
@@ -111,7 +115,7 @@ main_country_ui <- function(id) {
               "Vaccines safety", 
               value = "VacDet",
               plotlyOutput(
-                ns("Q25det_country_barplot"), 
+                ns("Q25det_country_barplot"),
                 height = "500px"
               )
             )
@@ -135,7 +139,7 @@ main_country_server <- function(id, vac_country) {
     # vac_country <- reactive({
     #   input$vac_country
     # })
-
+    
     vac_country_title <- reactive({
       req(vac_country())
       

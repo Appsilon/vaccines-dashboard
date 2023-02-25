@@ -135,6 +135,16 @@
         "processx"
       ]
     },
+    "checkmate": {
+      "Package": "checkmate",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "147e4db6909d8814bb30f671b49d7e06",
+      "Requirements": [
+        "backports"
+      ]
+    },
     "cli": {
       "Package": "cli",
       "Version": "3.6.0",
@@ -257,10 +267,10 @@
     },
     "fontawesome": {
       "Package": "fontawesome",
-      "Version": "0.2.2",
+      "Version": "0.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "55624ed409e46c5f358b2c060be87f67",
+      "Hash": "e80750aec5717dedc019ad7ee40e4a7c",
       "Requirements": [
         "htmltools",
         "rlang"
@@ -653,6 +663,57 @@
         "sourcetools",
         "withr",
         "xtable"
+      ]
+    },
+    "shiny.blueprint": {
+      "Package": "shiny.blueprint",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "appsilon",
+      "RemoteRepo": "shiny.blueprint",
+      "RemoteRef": "main",
+      "RemoteSha": "d8c60054388aad3cade3ba3d323b53e916e93df4",
+      "Hash": "9f7f973aef7805a3545a5e62d90481ab",
+      "Requirements": [
+        "checkmate",
+        "htmltools",
+        "shiny",
+        "shiny.react"
+      ]
+    },
+    "shiny.react": {
+      "Package": "shiny.react",
+      "Version": "0.2.3",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "shiny.react",
+      "RemoteUsername": "Appsilon",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "e86d7372e1946dd86dc0ee69e3b4e9ef7f20d7db",
+      "Hash": "2a7b44b7f0681618bf22c5688c64f90a",
+      "Requirements": [
+        "glue",
+        "htmltools",
+        "jsonlite",
+        "logger",
+        "purrr",
+        "rlang",
+        "shiny"
+      ]
+    },
+    "shinyjs": {
+      "Package": "shinyjs",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "802e4786b353a4bb27116957558548d5",
+      "Requirements": [
+        "digest",
+        "jsonlite",
+        "shiny"
       ]
     },
     "sourcetools": {

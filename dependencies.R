@@ -4,3 +4,7 @@ library(rhino)
 library(shiny)
 library(shiny.blueprint)
 library(shiny.react)
+
+library(shinyjs)
+
+library(glue)
