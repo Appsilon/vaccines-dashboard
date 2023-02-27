@@ -45,7 +45,15 @@ main_ui <- function(id) {
           6,
           div(
             style = "display: flex; align-items: flex-start;",
-            H6("Choose Country:", style = "margin: 0 10px 0 0; padding-top: 7px;"),
+            H6(
+              "Choose Country",
+              tags$br(),
+              tags$span(
+                "(for more detailed information)",
+                style = "font-weight: normal; font-style: italic;"
+              ),
+              style = "margin: 0 10px 0 0; padding-top: 7px; text-align: right;"
+            ),
             tree_ui(ns("vac_country")),
           )
         ),

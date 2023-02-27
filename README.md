@@ -21,7 +21,7 @@ remotes::install_github("Appsilon/shiny.blueprint")
 
 ```R
 library(shiny)
-runApp()                                                                            
+runApp()
 ```
 
 ## Data sources
