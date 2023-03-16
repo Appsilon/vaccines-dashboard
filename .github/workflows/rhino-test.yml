@@ -24,6 +24,11 @@ jobs:
         run: >
           sudo apt-get update && sudo apt-get install --yes
           libcurl4-openssl-dev
+          libgdal-dev
+          libjq-dev
+          libprotobuf-dev
+          libudunits2-dev
+          protobuf-compiler
 
       - name: Restore renv from cache
         uses: actions/cache@v2

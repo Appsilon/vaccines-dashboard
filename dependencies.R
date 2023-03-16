@@ -1,10 +1,11 @@
 # This file allows packrat (used by rsconnect during deployment) to pick up dependencies.
+library(geojsonio)
+library(glue)
+library(leaflet)
+library(plotly)
+library(readxl)
 library(rhino)
-
-library(shiny)
 library(shiny.blueprint)
 library(shiny.react)
-
+library(shiny)
 library(shinyjs)
-
-library(glue)
