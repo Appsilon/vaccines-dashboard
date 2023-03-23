@@ -4,14 +4,11 @@ box::use(
     NS, moduleServer, reactive, reactiveVal, observeEvent, req,
     renderUI, uiOutput, br, fluidRow, column, tagList, div, tags,
   ],
-  
   shiny.blueprint[
     Callout, Collapse, Button.shinyInput, Card, H6,
     reactOutput, renderReact,
   ],
-  
   shinyjs[useShinyjs, runjs],
-  
   glue[glue],
 )
 
@@ -40,7 +37,7 @@ main_ui <- function(id) {
     br(),
     Card(
       elevation = 2, interactive = TRUE,
-      fluidRow(  
+      fluidRow(
         column(
           6,
           div(
@@ -64,7 +61,7 @@ main_ui <- function(id) {
             uiOutput(ns("chosen_country"))
           )
         )
-      )   
+      )
     ),
     reactOutput(ns("ui_detail"))
   )
@@ -79,10 +76,10 @@ main_ui <- function(id) {
 main_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     # currentTab <- reactiveVal("tab_world")
     # observeEvent(input$select_tab, currentTab(input$select_tab))
-    # 
+    #
     # output$main_tabs <- renderReact(
     #   Tabs(
     #     selectedTabId = currentTab(),
@@ -101,10 +98,10 @@ main_server <- function(id) {
     main_world_server("world")
     vac_country <- tree_server("vac_country")
     main_country_server("country", vac_country = vac_country)
-    
+
     show_detail <- reactiveVal(FALSE)
     # observeEvent(input$show_detail, show_detail(!show_detail()))
-    output$ui_detail<- renderReact({
+    output$ui_detail <- renderReact({
       if (!is.null(vac_country())) {
         runjs(glue(
           "document.getElementById(\"{ns(\"ui_detail\")}\").scrollIntoView();"
@@ -115,7 +112,7 @@ main_server <- function(id) {
         main_country_ui(ns("country"))
       )
     })
-    
+
     output$chosen_country <- renderUI({
       req(vac_country())
       tags$span(
@@ -130,7 +127,7 @@ main_server <- function(id) {
 
 # if (interactive()) {
 #   shiny::shinyApp(
-#     main_ui("app"), 
+#     main_ui("app"),
 #     function(input, output) main_server("app")
 #   )
 # }

@@ -2,9 +2,7 @@
 
 box::use(
   geojsonio[geojson_read],
-  
   readr[read_csv],
-  
   dplyr[select],
 )
 
@@ -27,7 +25,7 @@ wgm_questions <- read_csv("data/wgm_questions.csv", show_col_types = FALSE) |>
 
 #' @export
 ls_stat <- do.call(
-  "mapply", 
+  "mapply",
   c(list, wgm_questions, SIMPLIFY = FALSE, USE.NAMES = FALSE)
 )
 
@@ -43,7 +41,7 @@ wgm_responses_country <- readRDS("./data/wgm_responses_country.RDS")
 detail_responses_country <- readRDS("./data/detail_responses_country.RDS")
 
 # -----------------------------------------------------------------------------
-#' data for maps 
+#' data for maps
 #' @export
 world_country <- geojson_read("./data/countries.geo.json", what = "sp")
 
