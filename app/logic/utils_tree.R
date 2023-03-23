@@ -70,7 +70,9 @@ ls_grp_country <- list(
 )
 
 continent <- list(
-  "Africa" = c("North Africa", "Eastern Africa", "Central Africa", "Southern Africa", "Western Africa"),
+  "Africa" = c(
+    "North Africa", "Eastern Africa", "Central Africa", "Southern Africa", "Western Africa"
+  ),
   "South America" = c("Central America and Mexico", "South America"),
   "Northern America" = c("Northern America"),
   "Asia" = c("Central Asia", "East Asia", "Southeast Asia", "South Asia", "Middle East"),
@@ -170,5 +172,3 @@ tree_server <- function(id) {
     return(selected_country)
   })
 }
-
-# shiny::shinyApp(tree_ui("app"), function(input, output) tree_server("app"))

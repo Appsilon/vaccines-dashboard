@@ -49,8 +49,3 @@ world_country <- geojson_read("./data/countries.geo.json", what = "sp")
 
 #' @export
 ls_colors <- readRDS("./data/ls_colors.RDS")
-
-# ls_country
-# ls_country_vac <- unique(tab_vaccines$Entity)
-# ls_country_res <- unique(wgm_responses_map$Entity)
-# ls_country <- sort(intersect(ls_country_vac, ls_country_res))

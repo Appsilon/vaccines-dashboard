@@ -21,7 +21,6 @@ menu_ui <- function(id) {
   tagList(
     Menu(
       style = "min-width: 200px",
-      # className = "bp4-elevation-2",
       MenuItem(
         text = "Wellcome Global Monitor 2018",
         MenuItem(
@@ -132,7 +131,3 @@ menu_server <- function(id) {
     return(stat)
   })
 }
-
-# if (interactive()) {
-#   shiny::shinyApp(ui("app"), function(input, output) server("app"))
-# }

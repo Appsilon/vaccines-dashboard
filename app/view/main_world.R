@@ -121,12 +121,6 @@ main_world_ui <- function(id) {
               "Statistic",
               style = "margin: 0 10px 0 0;"
             ),
-            # HTMLSelect.shinyInput(
-            #   inputId = ns("wgm_stat"),
-            #   options = ls_stat,
-            #   value = "WTScI",
-            #   minimal = TRUE
-            # )
             menu_ui(ns("wgm_stat")),
             Button.shinyInput(
               inputId = ns("trust_drawer_btn"),
@@ -303,10 +297,3 @@ main_world_server <- function(id) {
     })
   })
 }
-
-# if (interactive()) {
-#   shiny::shinyApp(
-#     main_world_ui("app"),
-#     function(input, output) main_world_server("app")
-#   )
-# }

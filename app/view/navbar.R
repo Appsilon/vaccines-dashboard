@@ -88,9 +88,11 @@ navbar_server <- function(id) {
           br(),
           H5("UNICEF"),
           Blockquote(
+            # nolint start: line_length_linter
             "Data: Percent of one-year-olds immunized for UN member nations - 1980 onwards for many countries,
             Available at: Online from UNICEF 'http://web.archive.org/web/20150709064229/http://data.unicef.org/child-health/immunization'.
             Also available via Gapminder 'https://www.gapminder.org/data/' (search “vaccine” to find the data)."
+            # nolint end
           ),
           br(),
           H5("Wellcome Global Monitor 2018"),
@@ -105,10 +107,3 @@ navbar_server <- function(id) {
     })
   })
 }
-
-# if (interactive()) {
-#   shiny::shinyApp(
-#     navbar_ui("app"),
-#     function(input, output) navbar_server("app")
-#   )
-# }

@@ -31,7 +31,6 @@ main_ui <- function(id) {
   ns <- NS(id)
   tagList(
     useShinyjs(),
-    # reactOutput(ns("main_tabs")),
     #---
     main_world_ui(ns("world")),
     br(),
@@ -76,31 +75,12 @@ main_ui <- function(id) {
 main_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
-    # currentTab <- reactiveVal("tab_world")
-    # observeEvent(input$select_tab, currentTab(input$select_tab))
-    #
-    # output$main_tabs <- renderReact(
-    #   Tabs(
-    #     selectedTabId = currentTab(),
-    #     onChange = setInput(ns("select_tab")),
-    #     Tab(id = "tab_world",
-    #         title = Button("World", minimal = TRUE, icon = "globe"),
-    #         panel = main_world_ui(ns("world"))
-    #     ),
-    #     Tab(id = "tab_country",
-    #         title = Button("Country", minimal = TRUE, icon = "polygon-filter"),
-    #         panel = main_country_ui(ns("country"))
-    #     )
-    #   )
-    # )
     # ---
     main_world_server("world")
     vac_country <- tree_server("vac_country")
     main_country_server("country", vac_country = vac_country)
 
     show_detail <- reactiveVal(FALSE)
-    # observeEvent(input$show_detail, show_detail(!show_detail()))
     output$ui_detail <- renderReact({
       if (!is.null(vac_country())) {
         runjs(glue(
@@ -124,10 +104,3 @@ main_server <- function(id) {
     })
   })
 }
-
-# if (interactive()) {
-#   shiny::shinyApp(
-#     main_ui("app"),
-#     function(input, output) main_server("app")
-#   )
-# }

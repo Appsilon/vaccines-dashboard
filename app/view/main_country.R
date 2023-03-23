@@ -39,23 +39,6 @@ main_country_ui <- function(id) {
   ns <- NS(id)
 
   tagList(
-    # fluidRow(
-    #   column(12,
-    #          Card(
-    #            elevation = 2, interactive = TRUE,
-    #            div(style = "display: flex; align-items: center;",
-    #                H6(
-    #                  "Country",
-    #                  style = "margin: 0 10px 0 0;"),
-    #                HTMLSelect.shinyInput(
-    #                  inputId = ns("vac_country"),
-    #                  options = ls_country,
-    #                  value = "Poland",
-    #                  minimal = TRUE)
-    #            )
-    #          )
-    #   )
-    # ),
     fluidRow(
       column(
         6,
@@ -133,11 +116,6 @@ main_country_ui <- function(id) {
 main_country_server <- function(id, vac_country) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-
-    # lineplot for country
-    # vac_country <- reactive({
-    #   input$vac_country
-    # })
 
     vac_country_title <- reactive({
       req(vac_country())
@@ -283,10 +261,3 @@ main_country_server <- function(id, vac_country) {
     #-
   })
 }
-
-# if (interactive()) {
-#   shiny::shinyApp(
-#     main_country_ui("app"),
-#     function(input, output) main_country_server("app", reactive({"Poland"}))
-#   )
-# }

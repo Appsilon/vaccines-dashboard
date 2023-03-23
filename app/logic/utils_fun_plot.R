@@ -240,7 +240,9 @@ plot_country_row <- function(
 }
 
 #' @export
-plot_country_questions <- function(plt_data, num_q, ls_col = NULL, title_tab = NULL, plt_height = NULL) {
+plot_country_questions <- function(
+  plt_data, num_q, ls_col = NULL, title_tab = NULL, plt_height = NULL
+) {
   assert_list(plt_data)
   assert_true(all(unlist(num_q) %in% names(plt_data)))
   assert_true(
