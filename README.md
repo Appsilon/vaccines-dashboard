@@ -1,28 +1,13 @@
 # Vaccines Dashboard
 
-This dashboard was built for purpose of testing the package `shiny.blueprint`.
-As `shiny.blueprint` is still under development, only a limited number of items could be shown. 
+This Rhino-based dashboard was built for the purpose of testing the
+[`shiny.blueprint`](https://github.com/Appsilon/shiny.blueprint) package.
 
-## How to use Shiny.blueprint
+## Running
 
-Shiny.blueprint makes available Blueprint _(the react-based UI toolkit)_ for Shiny apps.
-
-We believe that a great UI plays a huge role in the success of application projects. shiny.blueprint gives your apps.
-
-```R
-remotes::install_github("Appsilon/shiny.blueprint")
-```
-
-## Set-up environment
-
-1. Clone or download the source files for this repository
-2. Set-up the environment _(install all required packages)_ via `renv::restore()`
-3. run app from file `app.R`
-
-```R
-library(shiny)
-runApp()
-```
+1. Clone the repository and start R in the project root.
+2. Set-up the environment _(install all required packages)_ via `renv::restore()`.
+3. Run the app with `shiny::runApp()`.
 
 ## Data sources
 
