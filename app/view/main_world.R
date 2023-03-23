@@ -208,9 +208,9 @@ main_world_server <- function(id) {
     })
 
     # drawer vac_drawer
-    isOpen_vac_drawer <- reactiveVal(FALSE)
-    observeEvent(input$vac_drawer_btn, isOpen_vac_drawer(!isOpen_vac_drawer()))
-    observeEvent(input$dismiss_vac_drawer, isOpen_vac_drawer(FALSE))
+    is_open_vac_drawer <- reactiveVal(FALSE)
+    observeEvent(input$vac_drawer_btn, is_open_vac_drawer(!is_open_vac_drawer()))
+    observeEvent(input$dismiss_vac_drawer, is_open_vac_drawer(FALSE))
     drawer_title <- reactive({
       vac_type()
     })
@@ -221,7 +221,7 @@ main_world_server <- function(id) {
 
     output$vac_drawer <- renderReact({
       Drawer(
-        isOpen = isOpen_vac_drawer(),
+        isOpen = is_open_vac_drawer(),
         onClose = triggerEvent(ns("dismiss_vac_drawer")),
         usePortal = FALSE,
         title = drawer_title(),
@@ -236,16 +236,16 @@ main_world_server <- function(id) {
     })
 
     # drawer trust_drawer
-    isOpen_trust_drawer <- reactiveVal(FALSE)
-    observeEvent(input$trust_drawer_btn, isOpen_trust_drawer(!isOpen_trust_drawer()))
-    observeEvent(input$dismiss_trust_drawer, isOpen_trust_drawer(FALSE))
+    is_open_trust_drawer <- reactiveVal(FALSE)
+    observeEvent(input$trust_drawer_btn, is_open_trust_drawer(!is_open_trust_drawer()))
+    observeEvent(input$dismiss_trust_drawer, is_open_trust_drawer(FALSE))
     drawer_title <- reactive({
       vac_type()
     })
 
     output$trust_drawer <- renderReact({
       Drawer(
-        isOpen = isOpen_trust_drawer(),
+        isOpen = is_open_trust_drawer(),
         onClose = triggerEvent(ns("dismiss_trust_drawer")),
         usePortal = FALSE,
         title = "Wellcome Global Monitor 2018",

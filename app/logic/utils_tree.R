@@ -91,7 +91,7 @@ fun_grp_country <- function(lbl) {
   )
 }
 
-treeList <- list(
+tree_list <- list(
   list(
     id = "0", label = "World",
     childNodes =
@@ -112,13 +112,13 @@ treeList <- list(
 
 # ---
 
-modifyTree <- function(tree, ids, props) {
+modify_tree <- function(tree, ids, props) {
   if (!is.null(tree)) {
     map(tree, function(node) {
       if (node$id %in% ids) {
         node <- list_modify(node, !!!props)
       }
-      node$childNodes <- modifyTree(node$childNodes, ids, props)
+      node$childNodes <- modify_tree(node$childNodes, ids, props)
       node
     })
   }
@@ -137,21 +137,21 @@ tree_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    treeReactive <- reactiveVal(treeList)
+    tree_reactive <- reactiveVal(tree_list)
     observeEvent(input$expand, {
-      treeReactive(
-        modifyTree(treeReactive(), ids = input$expand$id, props = list(isExpanded = TRUE))
+      tree_reactive(
+        modify_tree(tree_reactive(), ids = input$expand$id, props = list(isExpanded = TRUE))
       )
     })
     observeEvent(input$collapse, {
-      treeReactive(
-        modifyTree(treeReactive(), ids = input$collapse$id, props = list(isExpanded = FALSE))
+      tree_reactive(
+        modify_tree(tree_reactive(), ids = input$collapse$id, props = list(isExpanded = FALSE))
       )
     })
 
     output$tree <- renderReact({
       Tree(
-        contents = treeReactive(),
+        contents = tree_reactive(),
         onNodeExpand = setInput(ns("expand")),
         onNodeCollapse = setInput(ns("collapse")),
         onNodeClick = setInput(ns("click"))

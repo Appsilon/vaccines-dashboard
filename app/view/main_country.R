@@ -141,7 +141,7 @@ main_country_server <- function(id, vac_country) {
     })
 
     # barplot
-    WTScIdet_country_detail <- reactive({
+    WTScIdet_country_detail <- reactive({ # nolint: object_name_linter
       req(vac_country())
 
       prep_country_detail(
@@ -241,7 +241,7 @@ main_country_server <- function(id, vac_country) {
     })
 
     # ---
-    Q25det_country_detail <- reactive({
+    Q25det_country_detail <- reactive({ # nolint: object_name_linter
       req(vac_country())
 
       prep_country_detail(

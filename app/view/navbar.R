@@ -60,15 +60,15 @@ navbar_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    isOpen <- reactiveVal(FALSE)
-    observeEvent(input$source, isOpen(TRUE))
-    observeEvent(input$close_info, isOpen(FALSE))
+    is_open <- reactiveVal(FALSE)
+    observeEvent(input$source, is_open(TRUE))
+    observeEvent(input$close_info, is_open(FALSE))
 
     output$source_info <- renderReact({
       Alert(
         usePortal = FALSE,
         confirmButtonText = "Got it",
-        isOpen = isOpen(),
+        isOpen = is_open(),
         onClose = triggerEvent(ns("close_info")),
         style = "min-width: 600px;",
         tagList(
