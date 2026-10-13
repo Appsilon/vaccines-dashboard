@@ -31,5 +31,3 @@ at [appsilon.com](https://appsilon.com).
 Get in touch [opensource@appsilon.com](mailto:opensource@appsilon.com)
 
 Check our [Open Source tools](https://shiny.tools).
-
-<a href = "https://appsilon.com/careers/" target="_blank"><img src="http://d2v95fjda94ghc.cloudfront.net/hiring.png" alt="We are hiring!"/></a>
